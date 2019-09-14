@@ -28,25 +28,62 @@
             grados:180
             
           });
-          console.log(this.state);
+          console.log("ASDASD");
           
           
         }
 
 
         render() {
-
-          const style = {
+          console.log(this.props.playerPosition);
+          const styleCarta = {
           'width': '240px',
           'height': '320px',
           'backgroundColor': '#333',
           'borderRadius': '10px',
           'transition': 'all 1s',
           'transformStyle': 'preserve-3d',
-          'transform': `rotateY(${this.state.grados}deg)`
-          
+          'transform': `rotateY(${this.state.grados}deg)`          
           }
-          return <div onClick={this.sayHello.bind(this)} style={style} />
+
+          const styleFrente = {
+          'position': 'absolute',
+          'height': '100%',
+          'width': '100%',
+          'background': '#F0F0F0',
+          'backfaceVisibility': 'hidden',  
+          'backgroundColor': 'crimson',
+          'fontSize': '38px' 
+          }
+
+          const styleAtras = {
+          'position': 'absolute',
+          'height': '100%',
+          'width': '100%',
+          'background': '#F0F0F0',
+          'backfaceVisibility': 'hidden',  
+          'transform': 'rotateY(180deg)',
+          'fontSize': '38px' 
+          }
+
+
+
+          return( 
+            <div onClick={this.sayHello.bind(this)} style={styleCarta} >
+
+              <div style={styleFrente}>
+                <h3>Frente</h3>
+              </div>
+
+              <div style={styleAtras}>
+                <h3>Atras</h3>
+              </div>
+
+
+            </div>
+          
+          
+          )
         }
 
 
@@ -57,18 +94,11 @@
           super(props)
           
           this.state = {
-            enemy: {
-              x: 20,
-              y: 20
-            },
             player: {
               x: 180,
               y: 320
-            },
-            bullet: {
-              x: 1000,
-              y: 360
             }
+            
           }
         }
 
@@ -84,7 +114,7 @@
           }
           return (
             <div style={style}>
-              <Carta/>
+              <Carta playerPosition={this.state.player}/>
               <Carta/>
               <Carta/>
               <Carta/>
