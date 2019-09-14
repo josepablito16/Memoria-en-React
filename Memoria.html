@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+      class Carta extends React.Component {
+        constructor()
+        {
+          super();
+          this.state={
+            grados:0
+          };
+        }
+
+
+        sayHello()
+        {
+          this.setState({
+            grados:180
+            
+          });
+          console.log(this.state);
+          
+          
+        }
+
+
+        render() {
+
+          const style = {
+          'width': '240px',
+          'height': '320px',
+          'backgroundColor': '#333',
+          'borderRadius': '10px',
+          'transition': 'all 1s',
+          'transformStyle': 'preserve-3d',
+          'transform': `rotateY(${this.state.grados}deg)`
+          
+          }
+          return <div onClick={this.sayHello.bind(this)} style={style} />
+        }
+
+
+      }
+
+      class Mesa extends React.Component {
+        constructor(props) {
+          super(props)
+          
+          this.state = {
+            enemy: {
+              x: 20,
+              y: 20
+            },
+            player: {
+              x: 180,
+              y: 320
+            },
+            bullet: {
+              x: 1000,
+              y: 360
+            }
+          }
+        }
+
+
+        render() {
+          const style = {
+            display: 'grid',
+            'gridTemplateColumns': 'auto auto auto auto',
+            'backgroundColor': '#2196F3',
+            'padding': '10px',
+            'gridGap': '10px',
+            'justifyContent': 'center'
+          }
+          return (
+            <div style={style}>
+              <Carta/>
+              <Carta/>
+              <Carta/>
+              <Carta/>
+              <Carta/>
+              <Carta/>
+            </div>
+          )
+        }
+      }
+      
+      ReactDOM.render(
+        <Mesa />,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>
