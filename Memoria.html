@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hello!</title>
+    <title>Memoria React</title>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -28,20 +28,20 @@
             grados:180
             
           });
-          console.log("ASDASD");
           
+          //console.log(this.props.baraja[0]);          
           
         }
 
 
         render() {
-          console.log(this.props.playerPosition);
           const styleCarta = {
-          'width': '240px',
-          'height': '320px',
+          'width': '70px',
+          'height': '110px',
           'backgroundColor': '#333',
           'borderRadius': '10px',
           'transition': 'all 1s',
+          'boxShadow': '0px 0px 10px black',
           'transformStyle': 'preserve-3d',
           'transform': `rotateY(${this.state.grados}deg)`          
           }
@@ -55,6 +55,24 @@
           'backgroundColor': 'crimson',
           'fontSize': '38px' 
           }
+          const styleImg = {
+          'position': 'absolute',
+          'height': '100%',
+          'width': '100%',
+          'backfaceVisibility': 'hidden'
+          }
+          const styleImgAtras = {
+          'height': '58%',
+          'width': '90%',
+          'background': '#F0F0F0',
+          //'backfaceVisibility': 'hidden',
+          'marginLeft': 'auto',
+          'marginRight': 'auto',
+          'backgroundImage': `url(${this.props.id}.png)`,
+          'backgroundSize': 'cover'
+          //src=`${this.props.id}.png`
+          
+          }
 
           const styleAtras = {
           'position': 'absolute',
@@ -63,20 +81,23 @@
           'background': '#F0F0F0',
           'backfaceVisibility': 'hidden',  
           'transform': 'rotateY(180deg)',
-          'fontSize': '38px' 
+          'fontSize': '38px',
+          'display': 'flex',
+          'alignItems': 'center',
+          'textAlign': 'center'
           }
 
 
 
           return( 
-            <div onClick={this.sayHello.bind(this)} style={styleCarta} >
+            <div onClick={this.sayHello.bind(this)} /*onMouseOver={this.sayHello.bind(this)}*/ style={styleCarta} >
 
               <div style={styleFrente}>
-                <h3>Frente</h3>
+                <img src="atras.jpg" style={styleImg} />
               </div>
 
               <div style={styleAtras}>
-                <h3>Atras</h3>
+                <div  style={styleImgAtras} />
               </div>
 
 
@@ -94,12 +115,26 @@
           super(props)
           
           this.state = {
-            player: {
-              x: 180,
-              y: 320
-            }
+            cartas:[]
             
           }
+          this.generarCartas();
+        }
+
+        generarCartas() 
+        {
+          for (let index = 1; this.state.cartas.length<16; index++) 
+          {
+            this.state.cartas.push(index);
+            this.state.cartas.push(index);
+            this.state.cartas.sort((ele1,ele2)=>Math.random()-Math.random());
+          }
+
+            
+
+          console.log(this.state.cartas);
+          
+          
         }
 
 
@@ -107,19 +142,22 @@
           const style = {
             display: 'grid',
             'gridTemplateColumns': 'auto auto auto auto',
-            'backgroundColor': '#2196F3',
+            'backgroundColor': 'wite',
             'padding': '10px',
             'gridGap': '10px',
             'justifyContent': 'center'
           }
+          //<Carta baraja={this.state.estados}/>
           return (
             <div style={style}>
-              <Carta playerPosition={this.state.player}/>
-              <Carta/>
-              <Carta/>
-              <Carta/>
-              <Carta/>
-              <Carta/>
+            {
+              this.state.cartas.map((i)=>
+              {
+                return <Carta id={i}  />
+
+              })
+            }
+
             </div>
           )
         }
