@@ -171,7 +171,9 @@
             cartas:[],
             cartasSeleccionadas:[],
             comparando:false,
-            turnos:0
+            turnos:0,
+            stop:false,
+            adivinadas:0
             
           }
           this.generarCartas();
@@ -203,6 +205,15 @@
 
               });
               control=2;
+              this.setState({
+                adivinadas:this.state.adivinadas+1
+                })
+
+                if(this.state.adivinadas===7)
+                {
+                  alert("GANASTE!");
+                }
+                
               
             }
             else
@@ -232,8 +243,27 @@
           
           if(this.state.comparando||
           this.state.cartasSeleccionadas.indexOf(carta)>-1||
-          carta.adivinada
+          carta.adivinada||
+          this.state.stop
           ){return 1}
+          if(this.state.turnos%2===1)
+          {
+            this.setState({
+            stop:true
+            });
+
+             setTimeout(() => {
+              this.setState({
+            stop:false
+            });
+              
+            }, 2000);
+            
+
+          }
+          
+          
+          
 
           const cartasSeleccionadas=[...this.state.cartasSeleccionadas,carta];
           this.setState({
@@ -278,7 +308,7 @@
             'gridGap': '10px',
             'justifyContent': 'center'
           }
-          //<Carta baraja={this.state.estados}/>
+
           return (
             <div style={style}>
             {
