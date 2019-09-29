@@ -117,13 +117,11 @@
           'height': '58%',
           'width': '90%',
           'background': '#F0F0F0',
-          //'backfaceVisibility': 'hidden',
           'marginLeft': 'auto',
           'marginRight': 'auto',
           'backgroundImage': `url(${this.props.id}.png)`,
           'backgroundColor': 'rgba(240, 240, 240, 0)',
           'backgroundSize': 'cover'
-          //src=`${this.props.id}.png`
           
           }
 
@@ -303,10 +301,10 @@
           const style = {
             display: 'grid',
             'gridTemplateColumns': 'auto auto auto auto',
-            'backgroundColor': 'wite',
             'padding': '10px',
             'gridGap': '10px',
-            'justifyContent': 'center'
+            'justifyContent': 'center',
+            'background': 'radial-gradient(ellipse at center, rgba(226,226,226,1) 0%, rgba(254,254,254,1) 100%)'
           }
 
           return (
@@ -319,7 +317,6 @@
                         cartaObj={carta}
                         key={index}
                         id={carta.id} 
-                        turnos={this.state.turnos}
                         esComparada={esComparada}
                         seleccionarCarta={this.seleccionarCarta.bind(this)}  
                         adivinada={carta.adivinada}
